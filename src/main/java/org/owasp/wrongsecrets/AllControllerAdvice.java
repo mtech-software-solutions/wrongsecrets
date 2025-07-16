@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
-import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -38,19 +37,19 @@ public class AllControllerAdvice {
 
   @ModelAttribute
   public void addChallenges(Model model) {
-    model.addAttribute(
-        "challenges",
-        challengeDefinitionsConfiguration.challenges().stream()
-            .map(
-                def ->
-                    ChallengeUI.toUI(
-                        def,
-                        scoreCard,
-                        runtimeEnvironment,
-                        challenges.difficulties(),
-                        challenges.getDefinitions().environments(),
-                        challenges.navigation(def)))
-            .collect(Collectors.toList()));
+    // model.addAttribute(
+    //     "challenges",
+    //     challengeDefinitionsConfiguration.challenges().stream()
+    //         .map(
+    //             def ->
+    //                 ChallengeUI.toUI(
+    //                     def,
+    //                     scoreCard,
+    //                     runtimeEnvironment,
+    //                     challenges.difficulties(),
+    //                     challenges.getDefinitions().environments(),
+    //                     challenges.navigation(def)))
+    //         .collect(Collectors.toList()));
   }
 
   @ModelAttribute
