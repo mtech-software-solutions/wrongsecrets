@@ -104,14 +104,14 @@ public class ChallengeUI {
     return navigation.previous().map(this::getLink).orElse(null);
   }
 
-  private String documentation(Function<ChallengeSource, String> extractor) {
-    if (runtimeEnvironment.canRun(challengeDefinition)) {
-      return challengeDefinition.source(runtimeEnvironment).map(extractor).orElse("");
-    } else {
-      // We cannot run the challenge but showing documentation should still be possible
-      return extractor.apply(challengeDefinition.sources().getFirst());
-    }
-  }
+  // private String documentation(Function<ChallengeSource, String> extractor) {
+  //   if (runtimeEnvironment.canRun(challengeDefinition)) {
+  //     return challengeDefinition.source(runtimeEnvironment).map(extractor).orElse("");
+  //   } else {
+  //     // We cannot run the challenge but showing documentation should still be possible
+  //     return extractor.apply(challengeDefinition.sources().getFirst());
+  //   }
+  // }
 
   /**
    * Returns filename of the explanation of the challenge.

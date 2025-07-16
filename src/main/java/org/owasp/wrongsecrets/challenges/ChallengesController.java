@@ -84,28 +84,28 @@ public class ChallengesController {
    * @param model exchanged with the FE
    * @return either a notification or a spoil
    */
-  @GetMapping("/spoil/{short-name}")
-  @Hidden
-  public String spoiler(@PathVariable("short-name") String shortName, Model model) {
-    if (ctfModeEnabled) {
-      model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
-    } else if (!spoilingEnabled) {
-      model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
-    } else {
-      Optional<Spoiler> spoilerFromRuntimeEnvironment =
-          challenges.findChallenge(shortName, runtimeEnvironment).map(Challenge::spoiler);
-      Supplier<Spoiler> spoilerFromRandomChallenge =
-          () -> {
-            var challengeDefinition = findByShortName(shortName);
-            return challenges.getChallenge(challengeDefinition).getFirst().spoiler();
-          };
+  // @GetMapping("/spoil/{short-name}")
+  // @Hidden
+  // public String spoiler(@PathVariable("short-name") String shortName, Model model) {
+  //   if (ctfModeEnabled) {
+  //     model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
+  //   } else if (!spoilingEnabled) {
+  //     model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
+  //   } else {
+  //     Optional<Spoiler> spoilerFromRuntimeEnvironment =
+  //         challenges.findChallenge(shortName, runtimeEnvironment).map(Challenge::spoiler);
+  //     Supplier<Spoiler> spoilerFromRandomChallenge =
+  //         () -> {
+  //           var challengeDefinition = findByShortName(shortName);
+  //           return challenges.getChallenge(challengeDefinition).getFirst().spoiler();
+  //         };
 
-      // We always want to show the spoiler even if we run in a non-supported environment
-      model.addAttribute(
-          "spoiler", spoilerFromRuntimeEnvironment.orElseGet(spoilerFromRandomChallenge));
-    }
-    return "spoil";
-  }
+  //     // We always want to show the spoiler even if we run in a non-supported environment
+  //     model.addAttribute(
+  //         "spoiler", spoilerFromRuntimeEnvironment.orElseGet(spoilerFromRandomChallenge));
+  //   }
+  //   return "spoil";
+  // }
 
   private void addChallengeUI(Model model, ChallengeDefinition challengeDefinition) {
     model.addAttribute(
